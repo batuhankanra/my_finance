@@ -1,11 +1,9 @@
 import { Router } from "express";
-
+import transaction from "./transaction.js"
 
 const router=Router()
 
 
-router.get("/ping",(_req,res)=>{
-    res.send("sa")
-})
+router.use("/transactions",transaction)
 
 export default router
