@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router";
 import MainLayout from "../layout/main_layout";
-import ExpensePage from "../pages/expense/expense_page";
-import IncomePage from "../pages/income/income_page";
-import NotFound from "../pages/not_found";
 import Home from "../pages/dashboard";
+import { transactionsLoader } from "../pages/loader";
+import NotFound from "../pages/not_found";
+import ExpensePage from "../pages/expense/expense_page";
 
 
 const router = createBrowserRouter([
@@ -13,20 +13,18 @@ const router = createBrowserRouter([
         children:[
             {
                 index:true,
-                Component:Home
+                Component:Home,
+                loader:transactionsLoader
             },
             {
                 path:"expense",
                 Component:ExpensePage
             },
             {
-                path:"incomes",
-                Component:IncomePage
-            },
-            {
                 path:"*",
                 Component:NotFound
             }
+           
         ]
     }
 ])

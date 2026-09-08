@@ -1,40 +1,43 @@
-import { createSlice , type PayloadAction , nanoid } from "@reduxjs/toolkit";
+import { createSlice,type PayloadAction } from "@reduxjs/toolkit";
+import type { TransactionFilters } from "../../types";
 
-
-
-interface TransactionsState{
-    items:Transaction[]
+interface TransactionUIState{
+    filters:TransactionFilters,
+    isFormModalOpen:boolean,
+    editingTransactionId:string|null
 }
 
-const initialState:TransactionsState={
-    items:[]
+const initialState:TransactionUIState={
+    filters:{
+        page:1,
+        limit:20
+    },
+    isFormModalOpen:false,
+    editingTransactionId:null
 }
 
-const transactionsSlice=createSlice({
-    name:'transactions',
+const transactionSlice=createSlice({
+    name:'transactionUI',
     initialState,
     reducers:{
-        addTransAction:{
-            reducer:(state,action:PayloadAction<Transaction>)=>{
-                state.items.push(action.payload)
-            },
-            prepare:(data:TransactionFormData)=>({
-                payload:{
-                    ...data,
-                    id:nanoid(),
-                    created_at:new Date().toISOString()
-                } as Transaction
-            }),
+        setFilters: (state,action:PayloadAction<TransactionFilters>)=>{
+            state.filters={...state.filters,...action.payload};
         },
-        removeTransaction:(state,action:PayloadAction<string>)=>{
-            state.items=state.items.filter(t=>t.id !== action.payload)
+        resetFilters: (state)=>{
+            state.filters=initialState.filters
         },
-        updateTransaction:(state,action:PayloadAction<Transaction>)=>{
-            const idx=state.items.findIndex(t=>t.id===action.payload.id);
-            if (idx !==-1) state.items[idx]=action.payload
+        openFormModal : (state,action:PayloadAction<string | null>)=>{
+            state.isFormModalOpen=true
+            state.editingTransactionId=action.payload
+        },
+        closeFormModal:(state)=>{
+            state.isFormModalOpen=false
+            state.editingTransactionId=null
         }
+
     }
 })
 
-export const {addTransAction,removeTransaction,updateTransaction} =transactionsSlice.actions
-export default transactionsSlice.reducer
+
+export const {closeFormModal,openFormModal,resetFilters,setFilters} =transactionSlice.actions
+export default transactionSlice.reducer

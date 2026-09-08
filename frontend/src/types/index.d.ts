@@ -1,26 +1,38 @@
-interface RequestOptions extends RequestInit{
-    params?:Record<string,string | number | undefined>
+export type TransactionType = 'income' | 'expense';
+
+export interface Transaction {
+  _id: string;
+  type: TransactionType;
+  amount: number;
+  category: string;
+  description?: string;
+  date: string;
+  created_at: string;
 }
 
-type TransactionType='income' | 'expense'
-
-interface Transaction{
-    id:string
-    type:TransactionType
-    amount:number
-    category:string
-    description?:string
-    date:string
-    created_at:string
+export interface TransactionFormData {
+  type: TransactionType;
+  amount: number;
+  category: string;
+  description?: string;
+  date: string;
 }
 
-interface TransactionFormData{
-    type:TransactionType
-    amount:number
-    category:string
-    description?:string
-    date:string
+export interface TransactionListResponse {
+  data: Transaction[];
+  total: number;
+  page: number;
+  totalPages: number;
+  totalIncome: number;
+  totalExpense: number;
+  balance: number;
 }
 
-
-
+export interface TransactionFilters {
+  type?: TransactionType;
+  category?: string;
+  startDate?: string;
+  endDate?: string;
+  page?: number;
+  limit?: number;
+}

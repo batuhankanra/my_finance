@@ -3,7 +3,7 @@ import trans_action_reducer from './slices/transactions'
 
 export const store = configureStore({
   reducer: {
-    trans_action:trans_action_reducer
+    transactionUI:trans_action_reducer
   }
 })
 export type RootState = ReturnType<typeof store.getState>

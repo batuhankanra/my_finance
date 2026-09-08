@@ -18,6 +18,9 @@ class TransActionService{
         total: number;
         page: number;
         totalPages: number;
+        totalIncome:number;
+        totalExpense:number;
+        balance:number;
     }
     >{
         const query:QueryFilter<ITransaction>={};
@@ -31,11 +34,21 @@ class TransActionService{
         }
         const skip =(page-1)*limit;
 
-        const [data,total]=await Promise.all([
+
+        const summaryQuery:QueryFilter<ITransaction>={...query};
+        delete summaryQuery.type;
+
+        const [data,total,summaryResult]=await Promise.all([
             Transaction.find(query).sort({date:-1}).skip(skip).limit(limit),
-            Transaction.countDocuments(query)
+            Transaction.countDocuments(query),
+            Transaction.aggregate([
+                { $match:summaryQuery},
+                {$group:{_id:"$type",total:{$sum:"$amount"}}}
+            ])
         ])
-        return {data,total,page,totalPages:Math.ceil(total/limit)}
+        const totalIncome=summaryResult.find(r=>r._id==="income")?.total || 0;
+        const totalExpense=summaryResult.find(r=>r._id==="expense")?.total || 0
+        return {data,total,page,totalPages:Math.ceil(total/limit),totalIncome,totalExpense,balance:totalIncome-totalExpense}
 
     }
     async getById(id:string):Promise<ITransaction | null>{
