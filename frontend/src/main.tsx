@@ -9,7 +9,7 @@ import { Toaster } from 'sonner'
 
 createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
-    <Toaster richColors position='top-right' />
+    <Toaster richColors position='top-center' />
     <RouterProvider router={router} />  
   </Provider>
 )
