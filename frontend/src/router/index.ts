@@ -4,6 +4,7 @@ import Home from "../pages/dashboard";
 import { transactionsLoader } from "../pages/loader";
 import NotFound from "../pages/not_found";
 import ExpensePage from "../pages/expense/expense_page";
+import IncomePage from "../pages/income/income_page";
 
 
 const router = createBrowserRouter([
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
             {
                 path:"expense",
                 Component:ExpensePage
+            },
+            {
+                path:"incomes",
+                Component:IncomePage
             },
             {
                 path:"*",

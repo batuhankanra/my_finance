@@ -5,9 +5,11 @@ import { RouterProvider } from 'react-router'
 import router from './router'
 import { Provider } from 'react-redux'
 import { store } from './store'
+import { Toaster } from 'sonner'
 
 createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
+    <Toaster richColors position='top-right' />
     <RouterProvider router={router} />  
   </Provider>
 )
