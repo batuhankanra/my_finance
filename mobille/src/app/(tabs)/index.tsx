@@ -1,11 +1,12 @@
 import { getCategoryColor, getCategoryLabel } from "@/constants/categories";
 import { useGetTransactionsQuery } from "@/store/api/transactionApi";
 import { Transaction } from "@/types/transaction";
-import { ActivityIndicator, FlatList, StyleSheet, Text, View } from "react-native";
+import { router } from "expo-router";
+import { ActivityIndicator, FlatList, StyleSheet, Text, Touchable, TouchableOpacity, View } from "react-native";
 
 
 
-export default function TransactionListScreen(){
+const TransactionListScreen=()=>{
     const { data, isLoading, isError, refetch } = useGetTransactionsQuery();
     if (isLoading){
         return (
@@ -70,7 +71,9 @@ export default function TransactionListScreen(){
           </View>
         </View>
       </View>
-
+      <TouchableOpacity style={styles.addButton} onPress={()=>router.push("/add")} >
+        <Text style={styles.addButtonText} >+Yeni işlem</Text>
+      </TouchableOpacity>
       <FlatList
         data={data?.data}
         keyExtractor={(item) => item._id}
@@ -85,11 +88,24 @@ export default function TransactionListScreen(){
     </View>
   );
 }
-
+export default TransactionListScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F8FAFC',
+  },
+  addButton: {
+    backgroundColor: '#6366F1',
+    borderRadius: 12,
+    paddingVertical: 14,
+    alignItems: 'center',
+    marginHorizontal: 16,
+    marginTop: 12,
+  },
+  addButtonText: {
+    color: '#FFFFFF',
+    fontSize: 15,
+    fontWeight: '700',
   },
   centered: {
     flex: 1,

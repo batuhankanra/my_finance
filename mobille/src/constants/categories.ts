@@ -8,21 +8,21 @@ export interface CategoryItem{
 
 export const Categories:Record<TransactionType,CategoryItem[]>={
     income:[
-        {label:"maaş",value:"Salary", color:"#22c55e"},
-        {label:"ek gelir",value:"freelance",color:"#84cc16"},
-        {label:"yatırım",value:"investment",color:"#14b8a6"},
-        {label:"hediye",value:"gift",color:"#06b6d4"},
-        {label:"diğer",value:"other_income",color:"#64748b"}
+        {label:"Maaş",value:"Maaş", color:"#22c55e"},
+        {label:"Ek Gelir",value:"Ek Gelir",color:"#84cc16"},
+        {label:"Yatırım",value:"Yatırım",color:"#14b8a6"},
+        {label:"Hediye",value:"Hediye",color:"#06b6d4"},
+        {label:"Diğer",value:"Diğer",color:"#64748b"}
     ],
     expense:[
-        { label: 'Kira', value: 'rent', color: '#EF4444' },
-        { label: 'Market', value: 'grocery', color: '#F97316' },
+        { label: 'Kira', value: 'Kira', color: '#EF4444' },
+        { label: 'Market', value: 'Market', color: '#F97316' },
         { label: 'Kredi', value: 'kredi', color: '#EC4899' },
-        { label: 'Ulaşım', value: 'transport', color: '#A855F7' },
-        { label: 'Fatura', value: 'bill', color: '#6366F1' },
-        { label: 'Eğlence', value: 'entertainment', color: '#F43F5E' },
-        { label: 'Sağlık', value: 'health', color: '#0EA5E9' },
-        { label: 'Diğer', value: 'other_expense', color: '#64748B' },
+        { label: 'Ulaşım', value: 'Ulaşım', color: '#A855F7' },
+        { label: 'Fatura', value: 'Fatura', color: '#6366F1' },
+        { label: 'Eğlence', value: 'Eğlence', color: '#F43F5E' },
+        { label: 'Sağlık', value: 'Sağlık', color: '#0EA5E9' },
+        { label: 'Diğer', value: 'Diğer', color: '#64748B' },
     ]
 }
 
