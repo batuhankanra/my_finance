@@ -14,10 +14,20 @@ export const transactionApi = createApi({
   tagTypes: ['Transaction'],
   endpoints: (builder) => ({
     getTransactions: builder.query<TransactionListResponse, TransactionFilters | void>({
-      query: (filters) => ({
-        url: '/',
-        params: filters ?? {},
-      }),
+      query: (filters) => {
+        const params:Record<string,string | number>={
+          page:filters?.page ?? 1,
+          limit:filters?.limit ?? 20
+        }
+        if (filters?.type) params.type = filters.type;
+        if (filters?.category) params.category = filters.category;
+        if (filters?.startDate) params.startDate = filters.startDate;
+        if (filters?.endDate) params.endDate = filters.endDate;
+        return {
+          url:"/",
+          params
+        }
+      },
       providesTags: ['Transaction'],
     }),
 
