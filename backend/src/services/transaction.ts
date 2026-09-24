@@ -30,7 +30,7 @@ class TransActionService{
         if (filters.startDate || filters.endDate){
             query.date={}
             if (filters.startDate) query.date.$gte=new Date(filters.startDate);
-            if (filters.endDate) query.date.$gte=new Date(filters.endDate);
+            if (filters.endDate) query.date.$lte=new Date(filters.endDate);
         }
         const skip =(page-1)*limit;
 

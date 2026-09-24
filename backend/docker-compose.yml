@@ -1,0 +1,32 @@
+services:
+  backend:
+    build: .
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - MONGO_URI=mongodb://mongo:27017/
+      - MONGO_NAME=finance
+    depends_on:
+      - mongo
+    networks:
+      - app_network
+
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - app_network
+    # Dışarıya açmak istemiyorsanız "ports" eklemeyin,
+    # sadece backend container'ı içeriden erişsin.
+
+volumes:
+  mongo_data:
+
+networks:
+  app_network:
+    driver: bridge

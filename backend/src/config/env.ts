@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import { logger } from '../utils/logger.js';
+import type { Config } from '../types/index.js';
 
 const get_env=(key:string):string=>{
     const value =process.env[key];
